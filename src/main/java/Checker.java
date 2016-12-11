@@ -33,13 +33,10 @@ public class Checker {
             ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
             opts.setReceiveMode(ReceiveMode.PEEK_LOCK);
 
-//            SubscriptionInfo subInfo = new SubscriptionInfo("AllMessages");
-//            CreateSubscriptionResult result =
-//                    service.createSubscription("vehiclemsgs", subInfo);
 
             while(true)  {
-                ReceiveSubscriptionMessageResult resultQM =
-                        service.receiveSubscriptionMessage("vehiclemsgs", "AllMessages");
+                ReceiveQueueMessageResult resultQM =
+                        service.receiveQueueMessage("SpeedingVehicles");
                 BrokeredMessage message = resultQM.getValue();
                 if (message != null && message.getMessageId() != null)
                 {
